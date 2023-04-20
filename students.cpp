@@ -1,24 +1,6 @@
-#include <iostream>
-// #include <string>
 #include <stdio.h>
 
-// using namespace std;
-
-// typedef struct {
-//   // std::string dirtBike;
-//   // std::string seatHeight;
-//   // std::string length;
-//   // std::string width;
-//   // std::string weight;
-//   char dirtBike[50];
-//   char seatHeight[10];
-//   char length[10];
-//   char width[10];
-//   char weight[10];
-
-// } Dirtbike;
-
-typedef struct{
+typedef struct{                                     //Create struct Student
   char type;
   char name[50];
   int age;
@@ -26,9 +8,9 @@ typedef struct{
 } Student;
 
 int main(void){
-  FILE *file;
+  FILE *file;                                       //File pointer
 
-  file = fopen("file.txt", "r");
+  file = fopen("file.txt", "r");                    //Open file.txt in read mode
 
   if (file == NULL){
     printf("Error opening file.\n");
@@ -40,16 +22,16 @@ int main(void){
   int read = 0;
   int records = 0;
   do{
-    read = fscanf(file,
+    read = fscanf(file,                             //Read file data into array
                   "%c, %49[^,],%d, %lf\n",
                   &students[records].type,
                   students[records].name,
                   &students[records].age,
                   &students[records].average);
 
-    if(read == 4)records++;
+    if(read == 4)records++;                         //if read finds 4 entries increment records
 
-    if(read != 4 && !feof(file)){
+    if(read != 4 && !feof(file)){                   //if read does not find 4 entries return error
       printf("File format incorrect.\n");
       return 1;
     }
@@ -65,7 +47,7 @@ int main(void){
 
   printf("\n%d records read.\n\n", records);
 
-  for (int i = 0; i < records; i++){
+  for (int i = 0; i < records; i++){                //Print individual lines form array of struct
     printf("%c %s %d %.2f\n",
            students[i].type, 
            students[i].name, 
